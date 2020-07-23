@@ -6,12 +6,13 @@
 
   let score = 0;
   let miss = 0;
+  const timeLimit = 3 * 1000;
+  let startTime;
 
   const target = document.getElementById('target');
   const scoreLabel = document.getElementById('score');
   const missLabel = document.getElementById('miss');
-
-  target.textContent = word;
+  const timerLabel = document.getElementById('timer');
 
   function updateTarget() {
     let placeholder = '';
@@ -20,6 +21,19 @@
     }
     target.textContent = placeholder + word.substring(loc)
   }
+
+  function updateTimer() {
+    const timeLeft = startTime + timeLimit - Date.now(); //残り時間
+    timerLabel.textContent = (timeLeft / 1000).toFixed(2); //小数点2桁表示
+  }
+  /**
+   * クリックしたら、ゲームスタート
+   */
+  window.addEventListener('click', () => {
+    target.textContent = word;
+    startTime = Date.now();
+    updateTimer();
+  });
 
   window.addEventListener('keydown', e => {
     if (e.key === word[loc] ) {
