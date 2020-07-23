@@ -5,17 +5,33 @@ console.clear();
   const year = 2020;
   const month = 6; //7月
 
+  /**
+   * 先月の日付を取得
+   */
   function getCalenderHead() {
     const dates = [];
     const lastDateOfLastMonth = new Date(year, month, 0).getDate(); // 先月(6/30)の末日を取得 => 30
-    const lastDateOfLastDay = new Date(year, month, 1).getDay(); // 今月(7/1)の曜日を取得 => 3
+    const firstDayOfThisMonth = new Date(year, month, 1).getDay(); // 今月(7/1)の曜日を取得 => 3
 
-    for (let i = 0; i < lastDateOfLastDay; i++) {
+    for (let i = 0; i < firstDayOfThisMonth; i++) {
       // 30
       // 29, 30
       // 28, 29, 30
       dates.unshift({
         date: lastDateOfLastMonth - i,
+        isToday: false,
+        isDisabled: true,
+      });
+    }
+    // console.log(dates);
+  }
+
+  function getCalenderTail() {
+    const dates = [];
+    const lastDayOfNextMonth = new Date(year, month + 1, 0).getDay(); // 今月の末日(7/31)の曜日を取得 => 5
+    for (let i = 1; i < 7 - lastDayOfNextMonth; i++) {
+      dates.push({
+        date: i,
         isToday: false,
         isDisabled: true,
       });
@@ -34,9 +50,10 @@ console.clear();
         isDisabled: false,
       });
     }
-    console.log(dates);
+    // console.log(dates);
   }
 
   getCalenderBody();
   getCalenderHead();
+  getCalenderTail();
 }
