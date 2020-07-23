@@ -37,6 +37,8 @@
       setTimeout(() => {
         showResult();
       }, 100); //alert処理でタイムがずれてしまうのでsetTimeoutで処理する
+
+      target.textContent = 'click to start!!';
     }
   }
 
@@ -51,6 +53,13 @@
     if (isPlaying === true) {
       return;
     }
+    loc = 0;
+    score = 0;
+    miss = 0;
+    scoreLabel.textContent = score;
+    missLabel.textContent = miss;
+    word = words[Math.floor(Math.random() * words.length)];
+
     isPlaying = true;
     target.textContent = word;
     startTime = Date.now();
