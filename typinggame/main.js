@@ -1,6 +1,7 @@
 'use strict';
 {
-  const word = 'apple';  //タイピングする文字
+  const words = ['apple', 'sky', 'blue', 'green'];  //タイピングする文字
+  let word = words[Math.floor(Math.random() * words.length)];
   let loc = 0; //タイピングする位置
 
   let score = 0;
@@ -23,6 +24,10 @@
   window.addEventListener('keydown', e => {
     if (e.key === word[loc] ) {
       loc++;
+      if(loc === word.length) {
+        word = words[Math.floor(Math.random() * words.length)];
+        loc = 0;
+      }
       updateTarget();
       score++;
       scoreLabel.textContent = score;
