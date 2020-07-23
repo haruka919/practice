@@ -2,8 +2,10 @@
 console.clear();
 
 {
-  let year = 2020;
-  let month = 6; //7月
+
+  const today = new Date();
+  let year = today.getFullYear();
+  let month = today.getMonth(); //7月
 
   /**
    * 先月の日付を取得
@@ -57,22 +59,26 @@ console.clear();
         isDisabled: false,
       });
     }
+    if (year === today.getFullYear() && month === today.getMonth()) {
+      dates[today.getDate() - 1].isToday = true;
+    }
     return dates;
   }
 
-  /**
-   * カレンダーを作成（日付を統合）
-   */
-  function createCalendar() {
+  function clearCalender() {
     const tbody = document.querySelector('tbody');
 
     while (tbody.firstChild) {
       tbody.removeChild(tbody.firstChild);
     }
+  }
 
+  function renderTitle() {
     const title = `${year}/${String(month + 1).padStart(2, '0')}`;
     document.getElementById('title').textContent = title;
+  }
 
+  function renderWeeks() {
     const dates = [
       ...getCalenderHead(),
       ...getCalenderBody(),
@@ -87,7 +93,7 @@ console.clear();
     }
     weeks.forEach(week => {
       const tr = document.createElement('tr');
-      week.forEach( date => {
+      week.forEach(date => {
         const td = document.createElement('td');
         td.textContent = date.date;
         if (date.isToday) {
@@ -101,6 +107,15 @@ console.clear();
       });
       document.querySelector('tbody').appendChild(tr);
     });
+  }
+
+  /**
+   * カレンダーを作成（日付を統合）
+   */
+  function createCalendar() {
+    clearCalender();
+    renderTitle();
+    renderWeeks();
   }
 
   /**
