@@ -142,5 +142,15 @@ console.clear();
     createCalendar();
   });
 
+
+  /**
+   * 今日の戻る
+   */
+  document.getElementById('today').addEventListener('click', () => {
+    year = today.getFullYear();
+    month = today.getMonth();
+    createCalendar();
+  });
+
   createCalendar();
 }
