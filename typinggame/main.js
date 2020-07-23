@@ -35,9 +35,14 @@
       clearTimeout(timeoutId);
       timerLabel.textContent = '0.00';
       setTimeout(() => {
-        alert('Game Over');
+        showResult();
       }, 100); //alert処理でタイムがずれてしまうのでsetTimeoutで処理する
     }
+  }
+
+  function showResult() {
+    const accuracy = score + miss === 0 ? 0 : score / ( score + miss ) * 100; //正答率
+    alert(`${score} letters, ${miss} misses, ${accuracy.toFixed(2)}% accuracy!`);
   }
   /**
    * クリックしたら、ゲームスタート
