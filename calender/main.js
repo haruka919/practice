@@ -23,9 +23,13 @@ console.clear();
         isDisabled: true,
       });
     }
-    // console.log(dates);
+    return dates;
   }
 
+
+  /**
+   * 来月の日付を取得
+   */
   function getCalenderTail() {
     const dates = [];
     const lastDayOfNextMonth = new Date(year, month + 1, 0).getDay(); // 今月の末日(7/31)の曜日を取得 => 5
@@ -36,9 +40,12 @@ console.clear();
         isDisabled: true,
       });
     }
-    console.log(dates);
+    return dates;
   }
 
+  /**
+   * 今月の日付を取得
+   */
   function getCalenderBody() {
     const dates = []; //date:日付, day:曜日
     const lastDateOfThisMonth = new Date(year, month + 1, 0).getDate(); // 今月の末日を取得
@@ -50,10 +57,20 @@ console.clear();
         isDisabled: false,
       });
     }
-    // console.log(dates);
+    return dates;
   }
 
-  getCalenderBody();
-  getCalenderHead();
-  getCalenderTail();
+  /**
+   * カレンダーを作成（日付を統合）
+   */
+  function createCalendar() {
+    const dates = [
+      ...getCalenderHead(),
+      ...getCalenderBody(),
+      ...getCalenderTail(),
+    ];
+    console.log(dates);
+  }
+
+  createCalendar();
 }
