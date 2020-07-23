@@ -2,8 +2,8 @@
 console.clear();
 
 {
-  const year = 2020;
-  const month = 6; //7月
+  let year = 2020;
+  let month = 6; //7月
 
   /**
    * 先月の日付を取得
@@ -64,6 +64,15 @@ console.clear();
    * カレンダーを作成（日付を統合）
    */
   function createCalendar() {
+    const tbody = document.querySelector('tbody');
+
+    while (tbody.firstChild) {
+      tbody.removeChild(tbody.firstChild);
+    }
+
+    const title = `${year}/${String(month + 1).padStart(2, '0')}`;
+    document.getElementById('title').textContent = title;
+
     const dates = [
       ...getCalenderHead(),
       ...getCalenderBody(),
@@ -93,6 +102,30 @@ console.clear();
       document.querySelector('tbody').appendChild(tr);
     });
   }
+
+  /**
+   * 先月を表示
+   */
+  document.getElementById('prev').addEventListener('click', () => {
+    month--;
+    if (month < 0) {
+      year--;
+      month = 11;
+    }
+    createCalendar();
+  });
+
+  /**
+   * 翌月を表示
+   */
+  document.getElementById('next').addEventListener('click', () => {
+    month++;
+    if (month > 11) {
+      year++;
+      month = 0;
+    }
+    createCalendar();
+  });
 
   createCalendar();
 }
