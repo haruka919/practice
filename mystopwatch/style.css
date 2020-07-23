@@ -33,3 +33,7 @@ body {
   display: flex;
   justify-content: space-between;
 }
+
+.inactive {
+  opacity: 0.6;
+}
