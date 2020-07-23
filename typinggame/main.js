@@ -25,6 +25,17 @@
   function updateTimer() {
     const timeLeft = startTime + timeLimit - Date.now(); //残り時間
     timerLabel.textContent = (timeLeft / 1000).toFixed(2); //小数点2桁表示
+    
+    const timeoutId = setTimeout(() => {
+      updateTimer();
+    }, 10);
+    if (timeLeft < 0) {
+      clearTimeout(timeoutId);
+      timerLabel.textContent = '0.00';
+      setTimeout(() => {
+        alert('Game Over');
+      }, 100); //alert処理でタイムがずれてしまうのでsetTimeoutで処理する
+    }
   }
   /**
    * クリックしたら、ゲームスタート
