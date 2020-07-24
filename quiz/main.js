@@ -12,7 +12,6 @@
 
   let currentNum = 0;
 
-  question.textContent = quizSet[currentNum].q;
 
   /**
    * 配列をシャッフルする 
@@ -25,10 +24,31 @@
     return arr;
   }
 
-  const shuffledChoices = shuffle([...quizSet[currentNum].c]); //スプレッド演算子にすることで参照されない。コピーの配列を新たに作っている
-  shuffledChoices.forEach(choice => {
-    const li = document.createElement('li');
-    li.textContent = choice;
-    choices.appendChild(li);
-  });
+  function checkAnswer(li) {
+    if (li.textContent === quizSet[currentNum].c[0]) {
+      console.log('correct');
+    } else {
+      console.log('wrong');
+    }
+  }
+
+
+  /**
+   * クイズをセットする
+   */
+  function setQuiz() {
+    question.textContent = quizSet[currentNum].q;
+
+    const shuffledChoices = shuffle([...quizSet[currentNum].c]); //スプレッド演算子にすることで参照されない。コピーの配列を新たに作っている
+    shuffledChoices.forEach(choice => {
+      const li = document.createElement('li');
+      li.textContent = choice;
+      li.addEventListener('click', () => {
+        checkAnswer(li);
+      });
+      choices.appendChild(li);
+    });
+  }
+
+  setQuiz();
 }
