@@ -52,4 +52,16 @@
     }
     document.querySelectorAll('.thumbnails > li')[target].click();
   });
+
+  /**
+   * Prevボタンを押した時
+   */
+  const prev = document.getElementById('prev');
+  prev.addEventListener('click', () => {
+    let target = currentIndex - 1;
+    if (target < 0) {
+      target = images.length - 1;
+    }
+    document.querySelectorAll('.thumbnails > li')[target].click();
+  });
 }
