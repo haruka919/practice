@@ -11,6 +11,7 @@
   ];
 
   let currentNum = 0;
+  let isAnswered = false;
 
 
   /**
@@ -28,6 +29,10 @@
    * 解答の正誤判定
    */
   function checkAnswer(li) {
+    if (isAnswered) {
+      return;
+    }
+    isAnswered = true;
     if (li.textContent === quizSet[currentNum].c[0]) {
       li.classList.add('correct');
     } else {
