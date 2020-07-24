@@ -38,6 +38,8 @@
     } else {
       li.classList.add('wrong');
     }
+
+    btn.classList.remove('disabled');
   }
 
 
@@ -45,7 +47,12 @@
    * クイズをセットする
    */
   function setQuiz() {
+    isAnswered = false;
     question.textContent = quizSet[currentNum].q;
+
+    while(choices.firstChild) {
+      choices.removeChild(choices.firstChild);
+    }
 
     const shuffledChoices = shuffle([...quizSet[currentNum].c]); //スプレッド演算子にすることで参照されない。コピーの配列を新たに作っている
     shuffledChoices.forEach(choice => {
@@ -59,4 +66,9 @@
   }
 
   setQuiz();
+
+  btn.addEventListener('click', () => {
+    currentNum++;
+    setQuiz();
+  });
 }
