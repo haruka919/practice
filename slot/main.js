@@ -6,7 +6,7 @@
       section.classList.add('panel');
 
       this.img = document.createElement('img');
-      this.img.src = 'img/seven.png';
+      this.img.src = this.getRandomImage();
 
       this.stop = document.createElement('div');
       this.stop.textContent = 'STOP';
@@ -30,6 +30,9 @@
 
     spin() {
       this.img.src = this.getRandomImage();
+      setTimeout(() => {
+        this.spin();
+      }, 50);
     }
   }
 
