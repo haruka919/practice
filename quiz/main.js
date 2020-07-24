@@ -3,6 +3,8 @@
   const question = document.getElementById('question');
   const choices = document.getElementById('choices');
   const btn = document.getElementById('btn');
+  const result = document.getElementById('result');
+  const scoreLabel = document.querySelector('#result p');
 
   const quizSet = [
     {q: 'What is A?', c:['A0', 'A1', 'A2']},
@@ -12,6 +14,7 @@
 
   let currentNum = 0;
   let isAnswered = false;
+  let score = 0;
 
 
   /**
@@ -35,6 +38,7 @@
     isAnswered = true;
     if (li.textContent === quizSet[currentNum].c[0]) {
       li.classList.add('correct');
+      score++;
     } else {
       li.classList.add('wrong');
     }
@@ -76,7 +80,13 @@
       return;
     }
     btn.classList.add('disabled');
-    currentNum++;
-    setQuiz();
+
+    if (currentNum === quizSet.length - 1) {
+      scoreLabel.textContent = `Score: ${score} / ${quizSet.length}`;
+      result.classList.remove('hidden');
+    } else {
+      currentNum++;
+      setQuiz();
+    }
   });
 }
