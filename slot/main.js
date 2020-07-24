@@ -8,9 +8,14 @@
       this.img = document.createElement('img');
       this.img.src = this.getRandomImage();
 
+      this.timeoutId = undefined;
+
       this.stop = document.createElement('div');
       this.stop.textContent = 'STOP';
       this.stop.classList.add('stop');
+      this.stop.addEventListener('click', () => {
+        clearTimeout(this.timeoutId);
+      });
 
       section.appendChild(this.img);
       section.appendChild(this.stop);
@@ -30,7 +35,7 @@
 
     spin() {
       this.img.src = this.getRandomImage();
-      setTimeout(() => {
+      this.timeoutId = setTimeout(() => {
         this.spin();
       }, 50);
     }
