@@ -14,6 +14,17 @@
 
   question.textContent = quizSet[currentNum].q;
 
+  /**
+   * 配列をシャッフルする 
+   */
+  function shuffle(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1)); // 配列の最後の要素を除き、その中でランダムに決める
+      [arr[j], arr[i]] = [arr[i], arr[j]];
+    }
+    return arr;
+  }
+
   quizSet[currentNum].c.forEach(choice => {
     const li = document.createElement('li');
     li.textContent = choice;
