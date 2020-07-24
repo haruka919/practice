@@ -34,9 +34,22 @@
       thumbnails[currentIndex].classList.remove('current');
       currentIndex = index;
       thumbnails[currentIndex].classList.add('current');
-    })
+    });
 
     li.appendChild(img);
     document.querySelector('.thumbnails').appendChild(li);
+
   })
+
+  /**
+   * Nextボタンを押した時
+   */
+  const next = document.getElementById('next');
+  next.addEventListener('click', () => {
+    let target = currentIndex + 1;
+    if (target === images.length) {
+      target = 0;
+    }
+    document.querySelectorAll('.thumbnails > li')[target].click();
+  });
 }
