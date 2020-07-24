@@ -64,4 +64,19 @@
     }
     document.querySelectorAll('.thumbnails > li')[target].click();
   });
+
+  /**
+   * スライドショー
+   */
+  function playSlideshow() {
+    next.click();
+    setTimeout(() => {
+      playSlideshow();
+    }, 1000);
+  }
+
+  const play = document.getElementById('play');
+  play.addEventListener('click', () => {
+    playSlideshow();
+  });
 }
