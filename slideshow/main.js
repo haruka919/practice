@@ -17,11 +17,21 @@
   const mainImage = document.getElementById('main');
   mainImage.src = images[currentIndex];
 
-  images.forEach(image => {
+  images.forEach((image, index) => {
     const img = document.createElement('img');
     img.src = image;
 
     const li = document.createElement('li');
+
+    if (index === currentIndex) {
+      li.classList.add('current');
+    }
+
+    // メイン画像を切り替え
+    li.addEventListener('click', () => {
+      mainImage.src = image;
+    })
+
     li.appendChild(img);
     document.querySelector('.thumbnails').appendChild(li);
   })
