@@ -24,6 +24,10 @@
         this.el.classList.add('pressed');
         currentNum++;
       }
+
+      if (currentNum === 4) {
+        clearTimeout(setTimeoutId);
+      }
     }
   }
   class Board {
@@ -53,9 +57,21 @@
   const board = new Board();
 
   let currentNum = 0; //押せる数字
+  let startTime;
+  let setTimeoutId;
+
+  function runTimer() {
+    const timer = document.getElementById('timer');
+    timer.textContent = ((Date.now() - startTime) / 1000).toFixed(2);
+    setTimeoutId = setTimeout(() => {
+      runTimer();
+    }, 10);
+  }
 
   const btn = document.getElementById('btn');
   btn.addEventListener('click', () => {
     board.activate();
+    startTime = Date.now();
+    runTimer();
   });
 }
