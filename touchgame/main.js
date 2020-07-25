@@ -56,7 +56,7 @@
 
   const board = new Board();
 
-  let currentNum = 0; //押せる数字
+  let currentNum; //押せる数字
   let startTime;
   let setTimeoutId;
 
@@ -70,6 +70,10 @@
 
   const btn = document.getElementById('btn');
   btn.addEventListener('click', () => {
+    if (typeof setTimeoutId !== undefined) {
+      clearTimeout(setTimeoutId);
+    }
+    currentNum = 0;
     board.activate();
     startTime = Date.now();
     runTimer();
