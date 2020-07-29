@@ -4,10 +4,9 @@
     constructor(quiz) {
       this.quiz = quiz;
       this.api_url = `https://opentdb.com/api.php?amount=1&type=multiple`
-      this.getQuizData(this.api_url);
     }
-    getQuizData(url) {
-      fetch(url)
+    async getQuizData() {
+      return await fetch(this.api_url)
         .then((response) => response.json())
         .then((data) => {
           this.quiz.setQuizzes(data.results[0]);
@@ -44,16 +43,18 @@
       this.startButton.hidden = false;
       this.quizInfo.currentQuizIndex = 0;
       this.quizInfo.correctCount = 0;
+      this.quizInfo.quizzes = [];
     }
 
     // クイズを開始する
-    startQuiz() {
+    async startQuiz() {
       // ロード中の表示
       this.title.textContent = "取得中";
       this.text.textContent = "少々お待ちください";
       this.startButton.hidden = true;
       for (let i = 0; i < this.count; i++) {
-        new QuizData(this);
+        const quizData = new QuizData(this);
+        await quizData.getQuizData();
       }
       this.setQuiz();
     }
